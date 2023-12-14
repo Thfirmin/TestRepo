@@ -1,1 +1,3 @@
 # Contract
+
+This is a contract
