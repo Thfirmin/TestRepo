@@ -1,3 +1,5 @@
 # Contract
 
 This is a contract
+
+Update of contract
