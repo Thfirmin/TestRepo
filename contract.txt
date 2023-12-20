@@ -8,3 +8,5 @@ Update of contract 2#
 Verification realized
 
 Não tinha issue aqui 2#
+
+TESTANDO
