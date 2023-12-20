@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Check if linked to open issue
         run: |
-          echo "GITHUB_EVENT_PATH is [$GITHUB_EVENT_PATH]"
+          echo "GITHUB_EVENT_PATH <<$(cat $GITHUB_EVENT_PATH)>>"
           issue_number=$(jq --raw-output .issue.number "$GITHUB_EVENT_PATH")
           echo "Issue number is [$issue_number]"
           linked_issue=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
