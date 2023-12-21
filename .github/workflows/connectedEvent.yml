@@ -16,7 +16,7 @@ jobs:
         run: |
           # Get the issue number from the event payload
           ISSUE_NUMBER=$(jq --raw-output .issue.number $GITHUB_EVENT_PATH)
-          echo "$(cat $GITHUB_EVENT_PATH)"
+          echo "Issue number: $ISSUE_NUMBER"
 
           # Move the issue to "In progress" using GitHub API
           curl --request POST \
