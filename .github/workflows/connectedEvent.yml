@@ -1,0 +1,31 @@
+
+name: Issue Signed Event Workflow
+on:
+  issues:
+    types:
+      - assigned
+
+jobs:
+  issueSignedEventJob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Move issue to "In progress"
+        run: |
+          # Get the issue number from the event payload
+          ISSUE_NUMBER=$(jq --raw-output .issue.number $GITHUB_EVENT_PATH)
+          echo GITHUB_EVENT_PATH << $GITHUB_EVENT_PATH >>
+
+          # Move the issue to "In progress" using GitHub API
+          curl --request POST \
+            --url "https://api.github.com/projects/columns/{COLUMN_ID}/moves" \
+            --header "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            --header "Accept: application/vnd.github.inertia-preview+json" \
+            --header "Content-Type: application/json" \
+            --data '{
+              "position": "after",
+              "column_id": {COLUMN_ID},
+              "card_id": {CARD_ID}
+            }'
